@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('admin')->group(function () {
+    Route::group(['middleware' => 'auth'], function () {
+        // dashboard
+        Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard.index');
+
+        //permissions
+        Route::resource('/permission', 'Admin\PermissionsController', [
+            'except' => ['show', 'create', 'edit', 'update', 'delete'], 'as' => 'admin'
+        ]);
+
+        //roles
+        Route::resource('/role', 'Admin\RoleController', [
+            'except' => ['show'], 'as' => 'admin'
+        ]);
+
+        //users
+        Route::resource('/user', 'Admin\UserController', [
+            'except' => ['show'], 'as' => 'admin'
+        ]);
+    });
+});
