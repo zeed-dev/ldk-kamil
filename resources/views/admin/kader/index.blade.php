@@ -33,6 +33,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" style="text-align: center; width:6%">NO.</th>
+                                    {{-- <th scope="col">PHOTO</th>  --}}
                                     <th scope="col">NAMA LENGKAP</th>
                                     <th scope="col">ALAMAT</th>
                                     <th scope="col">TEMPAT & TANGGAL LAHIR</th>
@@ -45,22 +46,33 @@
                                 @forelse ($kaders as $no => $kader)
                                     <tr>
                                         <th scope="row" style="text-align:center">{{ ++$no + ($kaders->currentPage()-1) * $kaders->perPage() }}</th>
+                                       {{-- <td>
+                                        <img src="{{ Storage::url('public/kaders/'.$kader->photo) }}" class="w-50"
+                                        style="height: 250;object-fit: cover;border-top-left-radius: .3rem;border-top-right-radius: .3rem;">
+                                       </td> --}}
                                         <td>{{ $kader->nama_lengkap }}</td>
                                         <td>{{ $kader->alamat_sekarang }}</td>
                                         <td>{{ $kader->tempat_tanggal_lahir }}</td>
-                                        <td>{{ $kader->semster }}</td>
+                                        <td>{{ $kader->semester }}</td>
                                         <td>{{ $kader->kelas }}</td>
                                         <td class="text-center">
-                                            @can('users.edit')
-                                            <a href="{{ route('admin.user.edit',$kader->id) }}" class="btn btn-sm btn-primary">
+                                            @can('kader.edit')
+                                            <a href="{{ route('admin.kader.edit',$kader->id) }}" class="btn btn-sm btn-primary">
                                                 <i class="fa fa-pencil-alt"></i>
                                             </a>
                                             @endcan
-                                            @can('users.delete')
+
+                                            @can('kader.show')
+                                            <a href="{{ route('admin.kader.show',$kader->id) }}" class="btn btn-sm btn-success">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            @endcan
+                                            @can('kader.delete')
                                             <button onClick="Delete(this.id)" class="btn btn-sm btn-danger" id="{{ $kader->id }}">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                             @endcan
+                                            
                                         </td>
                                     </tr>
                                 @empty

@@ -41,6 +41,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'kader.create']);
         Permission::create(['name' => 'kader.edit']);
         Permission::create(['name' => 'kader.delete']);
+        Permission::create(['name' => 'kader.show']);
 
         //permission for posts
         Permission::create(['name' => 'posts.index']);
