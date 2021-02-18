@@ -39,5 +39,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('/user', 'Admin\UserController', [
             'except' => ['show'], 'as' => 'admin'
         ]);
+
+        //users
+        Route::resource('/kader', 'Admin\KaderController', [
+            'as' => 'admin'
+        ]);
     });
 });

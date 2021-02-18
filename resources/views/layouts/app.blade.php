@@ -98,8 +98,8 @@
                         @endcan
 
                         @can('galeri.index')
-                        <li class="{{ setActive('admin/photo') }}"><a class="nav-link"
-                                href="#"><i class="fas fa-user-circle"></i>
+                        <li class="{{ setActive('admin/kader') }}"><a class="nav-link"
+                                href="{{ route('admin.kader.index') }}"><i class="fas fa-user-circle"></i>
                                 <span>Kader</span></a></li>
                         @endcan
 
