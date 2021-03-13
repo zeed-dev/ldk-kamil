@@ -23,6 +23,11 @@ class KaderController extends Controller
         return view('admin.kader.index', compact('kaders'));
     }
 
+    public function show(Kader $kader)
+    {
+        return view('admin.kader.show', compact('kader'));
+    }
+
     public function create()
     {
         return view('admin.kader.create');
@@ -93,7 +98,6 @@ class KaderController extends Controller
             'alamat_sekarang'       => 'required',
             'murobi_id'             => 'nullable',
         ]);
-
 
 
         if ($request->file('photo') == "") {

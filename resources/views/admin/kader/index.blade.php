@@ -67,6 +67,7 @@
                                                 <i class="fa fa-eye"></i>
                                             </a>
                                             @endcan
+                                            
                                             @can('kader.delete')
                                             <button onClick="Delete(this.id)" class="btn btn-sm btn-danger" id="{{ $kader->id }}">
                                                 <i class="fa fa-trash"></i>
