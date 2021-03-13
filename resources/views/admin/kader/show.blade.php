@@ -15,12 +15,6 @@
                         <div class="card author-box card-primary">
                             <div class="card-body">
                                 <div class="author-box-left">
-
-                                    {{-- <td>
-                                        <img src="{{ Storage::url('public/kaders/'.$kader->photo) }}" class="w-50"
-                                    style="height: 250;object-fit: cover;border-top-left-radius:
-                                    .3rem;border-top-right-radius: .3rem;">
-                                    </td> --}}
                                     <img alt="image" src="{{ Storage::url('public/kaders/'.$kader->photo) }}"
                                         class="rounded-circle author-box-picture">
                                 </div>
