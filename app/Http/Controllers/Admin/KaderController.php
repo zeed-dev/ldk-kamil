@@ -71,6 +71,76 @@ class KaderController extends Controller
         }
     }
 
+    public function edit(Kader $kader)
+    {
+        return view('admin.kader.edit', compact('kader'));
+    }
+
+    public function update(Request $request, Kader $kader)
+    {
+        // dd($request->all());
+
+        $this->validate($request, [
+            'nama_lengkap'          => 'required',
+            'nama_panggilan'        => 'required',
+            'angkatan'              => 'required',
+            'program_studi'         => 'required',
+            'semester'              => 'required',
+            'kelas'                 => 'required',
+            'photo'                 => 'image|mimes:jpeg,jpg,png|max:2000',
+            'tempat_tanggal_lahir'  => 'required',
+            'alamat_asal'           => 'required',
+            'alamat_sekarang'       => 'required',
+            'murobi_id'             => 'nullable',
+        ]);
+
+
+
+        if ($request->file('photo') == "") {
+            $kader = Kader::findOrfail($kader->id);
+            $kader->update([
+                'nama_lengkap'          => $request->input("nama_lengkap"),
+                'nama_panggilan'        => $request->input("nama_panggilan"),
+                'angkatan'              => $request->input("angkatan"),
+                'program_studi'         => $request->input("program_studi"),
+                'semester'              => $request->input("semester"),
+                'kelas'                 => $request->input("kelas"),
+                'tempat_tanggal_lahir'  => $request->input("tempat_tanggal_lahir"),
+                'alamat_asal'           => $request->input("alamat_asal"),
+                'alamat_sekarang'       => $request->input("alamat_sekarang"),
+                'murobi_id'             => $request->input("murobi_id"),
+            ]);
+        } else {
+            // Remove Image
+            Storage::disk('local')->delete('public/kaders/' . $kader->photo);
+
+            // Upload New Image
+            $photo = $request->file('photo');
+            $photo->storeAs('public/kaders', $photo->hashName());
+
+            $kader = Kader::findOrFail($kader->id);
+            $kader->update([
+                'nama_lengkap'          => $request->input("nama_lengkap"),
+                'nama_panggilan'        => $request->input("nama_panggilan"),
+                'angkatan'              => $request->input("angkatan"),
+                'program_studi'         => $request->input("program_studi"),
+                'semester'              => $request->input("semester"),
+                'kelas'                 => $request->input("kelas"),
+                'photo'                 => $photo->hashName(),
+                'tempat_tanggal_lahir'  => $request->input("tempat_tanggal_lahir"),
+                'alamat_asal'           => $request->input("alamat_asal"),
+                'alamat_sekarang'       => $request->input("alamat_sekarang"),
+                'murobi_id'             => $request->input("murobi_id"),
+            ]);
+        }
+
+        if ($kader) {
+            return redirect()->route('admin.kader.index')->with(['success' => 'Data Berhasil Diupdate!']);
+        } else {
+            return redirect()->route('admin.kader.index')->with(['error' => 'Data Gagal Diupdate!']);
+        }
+    }
+
     public function destroy($id)
     {
         $kaders = Kader::findOrFail($id);
