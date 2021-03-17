@@ -39,5 +39,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('/user', 'Admin\UserController', [
             'except' => ['show'], 'as' => 'admin'
         ]);
+
+        //murobbi
+        Route::resource('/murobbi', 'Admin\MurobbiController', [
+            'as' => 'admin'
+        ]);
     });
 });

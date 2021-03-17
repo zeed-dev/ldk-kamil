@@ -90,13 +90,11 @@
                         @if(auth()->user()->can('murobi.index') || auth()->user()->can('kader.index'))
                         <li class="menu-header">KADERISASI</li>
                         @endif
-
                         @can('galeri.index')
-                        <li class="{{ setActive('admin/photo') }}"><a class="nav-link"
-                                href="#"><i class="fas fa-user"></i>
+                        <li class="{{ setActive('admin/murobbi') }}"><a class="nav-link"
+                                href="{{ route('admin.murobbi.index') }}"><i class="fas fa-user"></i>
                                 <span>Murobbi</span></a></li>
                         @endcan
-
                         @can('galeri.index')
                         <li class="{{ setActive('admin/photo') }}"><a class="nav-link"
                                 href="#"><i class="fas fa-user-circle"></i>
@@ -106,7 +104,7 @@
                         @if(auth()->user()->can('photos.index') || auth()->user()->can('videos.index'))
                         <li class="menu-header">MEDIA</li>
                         @endif
-                        
+
                         @can('galeri.index')
                         <li class="{{ setActive('admin/photo') }}"><a class="nav-link"
                                 href="#"><i class="fas fa-image"></i>
@@ -144,7 +142,7 @@
                         @if(auth()->user()->can('roles.index') || auth()->user()->can('permission.index') || auth()->user()->can('users.index'))
                         <li class="menu-header">PENGATURAN</li>
                         @endif
-                        
+
                         @can('sliders.index')
                         <li class="{{ setActive('admin/slider') }}"><a class="nav-link"
                                 href="#"><i class="fas fa-laptop"></i>
@@ -157,7 +155,7 @@
                                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Users
                                 Management</span></a>
                             @endif
-                            
+
                             <ul class="dropdown-menu">
                                 @can('roles.index')
                                     <li class="{{ setActive('admin/role') }}"><a class="nav-link"

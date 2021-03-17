@@ -35,6 +35,7 @@ class PermissionsTableSeeder extends Seeder
         Permission::create(['name' => 'murobi.create']);
         Permission::create(['name' => 'murobi.edit']);
         Permission::create(['name' => 'murobi.delete']);
+        Permission::create(['name' => 'murobi.show']);
 
         //permission for kader
         Permission::create(['name' => 'kader.index']);
